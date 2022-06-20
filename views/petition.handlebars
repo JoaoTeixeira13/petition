@@ -1,0 +1,17 @@
+<h2> I am the petition template </h2>
+
+<div class="petition-failure">
+    {{#if error}}
+        <p> Uh, oh. Something went wrong. please try again.</p>
+    {{/if}}
+
+</div>
+
+<form method="POST">
+    <input type="text" placeholder="First Name" name="fName" />
+    <input type="text" placeholder="Last Name" name="lName" />
+    <input type="text" placeholder="Signature" name="signature" />
+
+    <button class="submit-button">Submit</button>
+
+</form>

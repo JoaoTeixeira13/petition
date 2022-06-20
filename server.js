@@ -18,8 +18,8 @@ app.get("/petition", (req, res) => {
 
 //
 
-app.get("/petition/signed", (req, res) => {
-    res.render("signed");
+app.get("/petition/thanks", (req, res) => {
+    res.render("thanks");
 });
 
 app.get("/petition/signers", (req, res) => {
@@ -48,7 +48,8 @@ app.post("/petition", (req, res) => {
         .then(() => {
             db.getSignatures();
             console.log("yay it worked");
-            res.render("thanks");
+            // res.render("thanks");
+            res.redirect("/petition/thanks");
         })
         .catch((err) => {
             console.log("error in db.add actor ", err);

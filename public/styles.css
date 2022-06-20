@@ -11,3 +11,14 @@ body {
 .petition-failure {
     height: 100px;
 }
+
+/* canvas {
+    background-color: #ffffde;
+} */
+
+canvas {
+    border: 1px solid black;
+    width: 200px;
+    height: 100px;
+    background-color: #ffffde;
+}

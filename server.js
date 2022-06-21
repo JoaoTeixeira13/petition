@@ -13,6 +13,7 @@ app.use(
     cookieSession({
         secret: `I'm always angry`,
         maxAge: 1000 * 60 * 60 * 24 * 14,
+        sameSite: true,
     })
 );
 
@@ -43,7 +44,28 @@ app.get("/petition", (req, res) => {
 
 app.get("/petition/thanks", (req, res) => {
     if (req.session.signedPetition) {
-        res.render("thanks");
+        console.log("thanks session signature is,", req.session.signatureId);
+
+        //get signature, then amount of rows
+
+        db.displaySignature(req.session.signatureId).then((result) => {
+            // const count = db.countSigners();
+            // console.log("count is ", count);
+            const sendResults = result.rows[0];
+            db.countSigners().then((result) => {
+                console.log(
+                    "result from Count singers is ",
+                    result.rows[0].count
+                );
+                const count = result.rows[0].count;
+
+                res.render("thanks", {
+                    title: "thanks",
+                    sendResults,
+                    count,
+                });
+            });
+        });
     } else {
         res.redirect("/petition");
     }

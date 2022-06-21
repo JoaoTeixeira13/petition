@@ -33,3 +33,11 @@ module.exports.addSignature = (firstName, lastName, signature) => {
     const param = [firstName, lastName, signature];
     return db.query(q, param);
 };
+
+module.exports.displaySignature = (id) => {
+    return db.query(`SELECT * FROM signers WHERE id = $1`, [id]);
+};
+
+module.exports.countSigners = () => {
+    return db.query(`SELECT COUNT (*) FROM signers`);
+};

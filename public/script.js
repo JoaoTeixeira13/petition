@@ -52,4 +52,5 @@ window.addEventListener("mouseup", (event) => {
         console.log("mouse is up");
     }
     let dataURL = canvasElem.toDataURL();
+    document.querySelector('input[name="signature"]').value = dataURL;
 });

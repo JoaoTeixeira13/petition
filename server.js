@@ -3,8 +3,17 @@ const app = express();
 const db = require("./db");
 
 const { engine } = require("express-handlebars");
+
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
+
+
+const cookieSession = require("cookie-session");
+
+app.use(cookieSession({
+    secret:`I'm always angry`,
+    maxAge: 1000 * 60 * 60 * 24 * 14,
+}))
 
 app.use(express.static("./public"));
 

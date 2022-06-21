@@ -31,7 +31,6 @@ canvasElem.addEventListener("mousedown", (event) => {
     x = event.offsetX;
     y = event.offsetY;
     mouseDown = true;
-    console.log("mouse is down ");
 });
 
 canvasElem.addEventListener("mousemove", (event) => {
@@ -39,7 +38,6 @@ canvasElem.addEventListener("mousemove", (event) => {
         sign(ctx, x, y, event.offsetX, event.offsetY);
         x = event.offsetX;
         y = event.offsetY;
-        console.log("mouse is moving");
     }
 });
 
@@ -49,8 +47,8 @@ window.addEventListener("mouseup", (event) => {
         x = 0;
         y = 0;
         mouseDown = false;
-        console.log("mouse is up");
     }
+    // inject the canvas toDataURL result into the input signature field
     let dataURL = canvasElem.toDataURL();
     document.querySelector('input[name="signature"]').value = dataURL;
 });

@@ -1,20 +1,27 @@
+/* F1E4E4
+15CDA8
+099A97
+9764C7 */
+
 body {
-    /* #3f7329 */
-    background-color: #adcf9f;
+    background-color: #099a97;
+    color: #f1e4e4;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bolder;
+    height: 100vh;
+}
+h1 {
+    font-size: 3rem;
+}
+h2 {
+    font-size: 2rem;
 }
 .petition-failure {
     height: 100px;
 }
-
-/* canvas {
-    background-color: #ffffde;
-} */
 
 canvas {
     border: 1px solid black;
@@ -22,3 +29,4 @@ canvas {
     height: 100px;
     background-color: #ffffde;
 }
+

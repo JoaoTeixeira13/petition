@@ -13,21 +13,11 @@ const db = spicedPg(
     `postgres:${username}:${password}@localhost:5432/${database}`
 );
 
-console.log("[db] connecting to: ", database);
-
 module.exports.getSignatures = () => {
     return db.query(`SELECT * FROM signers`);
 };
 
 module.exports.addSignature = (firstName, lastName, signature) => {
-    console.log(
-        "[db] first name, ",
-        firstName,
-        "[db] lastName",
-        lastName,
-        "signature",
-        signature
-    );
     const q = `INSERT INTO signers(first, last, signature) VALUES ($1, $2, $3)
     RETURNING id`;
     const param = [firstName, lastName, signature];

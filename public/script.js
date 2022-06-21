@@ -1,4 +1,5 @@
 //refer to MDN Documentation for further clarifications
+
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
 
 // function sign to be called inside the events  (using canvas context)
@@ -23,7 +24,6 @@ let y = 0;
 
 const canvasElem = document.getElementById("signCanvas");
 const ctx = canvasElem.getContext("2d");
-console.log("canvas element is ", canvasElem);
 
 //use the event offsetX and offsetY and assign these values to x and y
 
@@ -51,4 +51,5 @@ window.addEventListener("mouseup", (event) => {
         mouseDown = false;
         console.log("mouse is up");
     }
+    let dataURL = canvasElem.toDataURL();
 });

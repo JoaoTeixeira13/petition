@@ -28,7 +28,8 @@ module.exports.addSignature = (firstName, lastName, signature) => {
         "signature",
         signature
     );
-    const q = `INSERT INTO signers(first, last, signature) VALUES ($1, $2, $3)`;
+    const q = `INSERT INTO signers(first, last, signature) VALUES ($1, $2, $3)
+    RETURNING id`;
     const param = [firstName, lastName, signature];
     return db.query(q, param);
 };

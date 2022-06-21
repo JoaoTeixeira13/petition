@@ -35,7 +35,9 @@ app.get("/petition", (req, res) => {
     if (req.session.signedPetition) {
         res.redirect("/petition/thanks");
     } else {
-        res.render("petition");
+        res.render("petition", {
+            title: "Petition",
+        });
     }
 });
 
@@ -51,7 +53,7 @@ app.get("/petition/thanks", (req, res) => {
                 const count = result.rows[0].count;
 
                 res.render("thanks", {
-                    title: "thanks",
+                    title: "Thanks",
                     sendResults,
                     count,
                 });
@@ -69,7 +71,7 @@ app.get("/petition/signers", (req, res) => {
                 const sendResults = result.rows;
 
                 res.render("signers", {
-                    title: "signers",
+                    title: "Signers",
                     sendResults,
                 });
             })
@@ -95,7 +97,7 @@ app.post("/petition", (req, res) => {
         .catch((err) => {
             console.log("error in db.add actor ", err);
             res.render("petition", {
-                title: "petition",
+                title: "Petition",
                 error: true,
             });
         });

@@ -34,10 +34,40 @@ app.use((req, res, next) => {
 // /register route
 
 app.get("/register", (req, res) => {
-    res.render("register");
+    res.render("register", {
+        title: "Register",
+    });
 });
 
-app.post("/register", (req, res) => {});
+app.post("/register", (req, res) => {
+    bcrypt
+        .hash(req.body.password)
+        .then(function (hash) {
+            const hashedPassword = hash;
+
+            // db.add user must be returned in order to be handled in the catch
+
+            return db
+                .addUser(
+                    req.body.fName,
+                    req.body.lName,
+                    req.body.email,
+                    hashedPassword
+                )
+                .then((result) => {
+                    console.log("Inside addUser");
+                    req.session.userId = result.rows[0].id;
+                    res.redirect("/petition");
+                });
+        })
+        .catch((err) => {
+            console.log("error in db.add actor ", err);
+            res.render("register", {
+                title: "Register",
+                error: true,
+            });
+        });
+});
 
 // /login route
 
@@ -45,11 +75,38 @@ app.get("/login", (req, res) => {
     res.render("login");
 });
 
-app.post("/login", (req, res) => {});
+app.post("/login", (req, res) => {
+    db.matchEmail(req.body.email)
+        .then((result) => {
+            return bcrypt
+                .compare(req.body.password, result.rows[0].password)
+                .then(function (hashComparison) {
+                    if (hashComparison) {
+                        req.session.userId = result.rows[0].id;
+                        res.redirect("/petition");
+                    } else {
+                        res.render("login", {
+                            title: "Login",
+                            error: true,
+                        });
+                    }
+                });
+        })
+        .catch((err) => {
+            console.log("error in db.add actor ", err);
+            res.render("login", {
+                title: "Login",
+                error: true,
+            });
+        });
+});
 
 // /petition route
 
 app.get("/petition", (req, res) => {
+    if (!req.session.userId) {
+        res.redirect("/register");
+    }
     if (req.session.signedPetition) {
         res.redirect("/petition/thanks");
     } else {
@@ -60,7 +117,12 @@ app.get("/petition", (req, res) => {
 });
 
 app.post("/petition", (req, res) => {
-    db.addSignature(req.body.fName, req.body.lName, req.body.signature)
+    db.addSignature(
+        req.body.fName,
+        req.body.lName,
+        req.body.signature,
+        req.session.userId
+    )
         .then((result) => {
             db.getSignatures();
 
@@ -82,6 +144,9 @@ app.post("/petition", (req, res) => {
 //  petition/thanks route
 
 app.get("/petition/thanks", (req, res) => {
+    if (!req.session.userId) {
+        res.redirect("/register");
+    }
     if (req.session.signedPetition) {
         //get signature, then amount of signers, then render
 
@@ -105,6 +170,9 @@ app.get("/petition/thanks", (req, res) => {
 // /petition/signers route
 
 app.get("/petition/signers", (req, res) => {
+    if (!req.session.userId) {
+        res.redirect("/register");
+    }
     if (req.session.signedPetition) {
         db.getSignatures()
             .then((result) => {
@@ -127,7 +195,7 @@ app.get("/petition/signers", (req, res) => {
 
 app.get("/logout", (req, res) => {
     req.session = null;
-    res.redirect("/petition");
+    res.redirect("/register");
 });
 
 app.listen(8080, () => {

@@ -19,10 +19,10 @@ module.exports.getSignatures = () => {
     return db.query(`SELECT * FROM signers`);
 };
 
-module.exports.addSignature = (firstName, lastName, signature) => {
-    const q = `INSERT INTO signers(first, last, signature) VALUES ($1, $2, $3)
+module.exports.addSignature = (firstName, lastName, signature, userId) => {
+    const q = `INSERT INTO signers(first, last, signature, user_id) VALUES ($1, $2, $3, $4)
     RETURNING id`;
-    const param = [firstName, lastName, signature];
+    const param = [firstName, lastName, signature, userId];
     return db.query(q, param);
 };
 
@@ -35,3 +35,14 @@ module.exports.countSigners = () => {
 };
 
 // user queries
+
+module.exports.addUser = (firstName, lastName, email, password) => {
+    const q = `INSERT INTO users(first, last, email, password) VALUES ($1, $2, $3, $4)
+    RETURNING id`;
+    const param = [firstName, lastName, email, password];
+    return db.query(q, param);
+};
+
+module.exports.matchEmail = (email) => {
+    return db.query(`SELECT * FROM users WHERE email = $1`, [email]);
+};

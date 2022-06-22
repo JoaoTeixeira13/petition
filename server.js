@@ -3,6 +3,7 @@ const app = express();
 const db = require("./db");
 const cookieSession = require("cookie-session");
 const bcrypt = require("./bcrypt");
+const { registerRedirection } = require("./registerRedirection");
 
 const { engine } = require("express-handlebars");
 
@@ -72,7 +73,9 @@ app.post("/register", (req, res) => {
 // /login route
 
 app.get("/login", (req, res) => {
-    res.render("login");
+    res.render("login", {
+        title: "Login",
+    });
 });
 
 app.post("/login", (req, res) => {
@@ -105,8 +108,9 @@ app.post("/login", (req, res) => {
 
 app.get("/petition", (req, res) => {
     if (!req.session.userId) {
-        res.redirect("/register");
+        return res.redirect("/register");
     }
+
     if (req.session.signedPetition) {
         res.redirect("/petition/thanks");
     } else {
@@ -145,8 +149,9 @@ app.post("/petition", (req, res) => {
 
 app.get("/petition/thanks", (req, res) => {
     if (!req.session.userId) {
-        res.redirect("/register");
+        return res.redirect("/register");
     }
+
     if (req.session.signedPetition) {
         //get signature, then amount of signers, then render
 
@@ -171,8 +176,11 @@ app.get("/petition/thanks", (req, res) => {
 
 app.get("/petition/signers", (req, res) => {
     if (!req.session.userId) {
-        res.redirect("/register");
+        return res.redirect("/register");
     }
+
+    // registerRedirection(req, res);
+
     if (req.session.signedPetition) {
         db.getSignatures()
             .then((result) => {

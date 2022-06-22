@@ -1,0 +1,43 @@
+<section>
+
+    <h2> Join our campaign! You can register and show your support bellow. </h2>
+
+    <div class="register-failure">
+        {{#if error}}
+            <p> Uh, oh. Something went wrong. please try again.</p>
+        {{/if}}
+
+    </div>
+
+    <form method="POST">
+        <input
+            class="input-field"
+            type="text"
+            placeholder="First Name"
+            name="fName"
+        />
+        <input
+            class="input-field"
+            type="text"
+            placeholder="Last Name"
+            name="lName"
+        />
+        <input
+            class="input-field"
+            type="text"
+            placeholder="Email"
+            name="email"
+        />
+        <input
+            class="input-field"
+            type="password"
+            placeholder="Password"
+            name="password"
+        />
+
+        <button class="submit-button">Submit</button>
+
+    </form>
+
+    <p> Already registered? You can login <a href="/login">here</a> .</p>
+</section>

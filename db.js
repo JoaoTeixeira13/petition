@@ -13,6 +13,8 @@ const db = spicedPg(
     `postgres:${username}:${password}@localhost:5432/${database}`
 );
 
+// signature queries
+
 module.exports.getSignatures = () => {
     return db.query(`SELECT * FROM signers`);
 };
@@ -31,3 +33,5 @@ module.exports.displaySignature = (id) => {
 module.exports.countSigners = () => {
     return db.query(`SELECT COUNT (*) FROM signers`);
 };
+
+// user queries

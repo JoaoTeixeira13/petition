@@ -1,0 +1,31 @@
+<section>
+
+    <h2> Please log in. </h2>
+
+    <div class="login-failure">
+        {{#if error}}
+            <p> Uh, oh. Something went wrong. please try again.</p>
+        {{/if}}
+
+    </div>
+
+    <form method="POST">
+
+        <input
+            class="input-field"
+            type="text"
+            placeholder="Email"
+            name="email"
+        />
+        <input
+            class="input-field"
+            type="password"
+            placeholder="Password"
+            name="password"
+        />
+
+        <button class="submit-button">Log in</button>
+
+    </form>
+
+</section>

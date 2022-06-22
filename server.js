@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const db = require("./db");
+const cookieSession = require("cookie-session");
+const bcrypt = require("./bcrypt");
 
 const { engine } = require("express-handlebars");
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
-
-const cookieSession = require("cookie-session");
 
 app.use(
     cookieSession({
@@ -31,6 +31,24 @@ app.use((req, res, next) => {
     next();
 });
 
+// /register route
+
+app.get("/register", (req, res) => {
+    res.render("register");
+});
+
+app.post("/register", (req, res) => {});
+
+// /login route
+
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+
+app.post("/login", (req, res) => {});
+
+// /petition route
+
 app.get("/petition", (req, res) => {
     if (req.session.signedPetition) {
         res.redirect("/petition/thanks");
@@ -38,48 +56,6 @@ app.get("/petition", (req, res) => {
         res.render("petition", {
             title: "Petition",
         });
-    }
-});
-
-//
-
-app.get("/petition/thanks", (req, res) => {
-    if (req.session.signedPetition) {
-        //get signature, then amount of rows
-
-        db.displaySignature(req.session.signatureId).then((result) => {
-            const sendResults = result.rows[0];
-            db.countSigners().then((result) => {
-                const count = result.rows[0].count;
-
-                res.render("thanks", {
-                    title: "Thanks",
-                    sendResults,
-                    count,
-                });
-            });
-        });
-    } else {
-        res.redirect("/petition");
-    }
-});
-
-app.get("/petition/signers", (req, res) => {
-    if (req.session.signedPetition) {
-        db.getSignatures()
-            .then((result) => {
-                const sendResults = result.rows;
-
-                res.render("signers", {
-                    title: "Signers",
-                    sendResults,
-                });
-            })
-            .catch((err) => {
-                console.log("error is ", err);
-            });
-    } else {
-        res.redirect("/petition");
     }
 });
 
@@ -102,6 +78,52 @@ app.post("/petition", (req, res) => {
             });
         });
 });
+
+//  petition/thanks route
+
+app.get("/petition/thanks", (req, res) => {
+    if (req.session.signedPetition) {
+        //get signature, then amount of signers, then render
+
+        db.displaySignature(req.session.signatureId).then((result) => {
+            const sendResults = result.rows[0];
+            db.countSigners().then((result) => {
+                const count = result.rows[0].count;
+
+                res.render("thanks", {
+                    title: "Thanks",
+                    sendResults,
+                    count,
+                });
+            });
+        });
+    } else {
+        res.redirect("/petition");
+    }
+});
+
+// /petition/signers route
+
+app.get("/petition/signers", (req, res) => {
+    if (req.session.signedPetition) {
+        db.getSignatures()
+            .then((result) => {
+                const sendResults = result.rows;
+
+                res.render("signers", {
+                    title: "Signers",
+                    sendResults,
+                });
+            })
+            .catch((err) => {
+                console.log("error is ", err);
+            });
+    } else {
+        res.redirect("/petition");
+    }
+});
+
+// /logout route (resetting cookies)
 
 app.get("/logout", (req, res) => {
     req.session = null;

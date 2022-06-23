@@ -10,7 +10,8 @@ const username = "postgres";
 const password = "postgres";
 
 const db = spicedPg(
-    `postgres:${username}:${password}@localhost:5432/${database}`
+    process.env.DATABASE_URL ||
+        `postgres:${username}:${password}@localhost:5432/${database}`
 );
 
 // signature queries
@@ -46,3 +47,9 @@ module.exports.addUser = (firstName, lastName, email, password) => {
 module.exports.matchEmail = (email) => {
     return db.query(`SELECT * FROM users WHERE email = $1`, [email]);
 };
+
+//SELECT users.*, signatures.id AS "signatureID"
+//FROM users
+// JOIN signatures
+//ON signatures.user_id = users.id
+// WHERE email = $1

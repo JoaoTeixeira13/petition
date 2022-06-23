@@ -25,9 +25,10 @@ h1 {
 }
 h2 {
     font-size: 2rem;
+    margin-bottom: 50px;
 }
 .petition-failure {
-    height: 100px;
+    /* height: 100px; */
 }
 a {
     text-decoration: none;
@@ -66,7 +67,8 @@ button {
     height: 50px;
     font-size: 1.2rem;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
     border-radius: 10px;
     font-family: Helvetica, Arial, sans-serif;
     color: #f1e4e4;

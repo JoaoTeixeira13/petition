@@ -7,12 +7,15 @@ const { registerRedirection } = require("./registerRedirection");
 
 const { engine } = require("express-handlebars");
 
+const COOKIE_SECRET =
+    process.env.COOKIE_SECRET || require("./secrets.json").COOKIE_SECRET;
+
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 
 app.use(
     cookieSession({
-        secret: `I'm always angry`,
+        secret: COOKIE_SECRET,
         maxAge: 1000 * 60 * 60 * 24 * 14,
         sameSite: true,
     })
@@ -58,7 +61,7 @@ app.post("/register", (req, res) => {
                 .then((result) => {
                     console.log("Inside addUser");
                     req.session.userId = result.rows[0].id;
-                    res.redirect("/petition");
+                    res.redirect("/profile");
                 });
         })
         .catch((err) => {
@@ -68,6 +71,17 @@ app.post("/register", (req, res) => {
                 error: true,
             });
         });
+});
+
+// /profile route
+
+app.get("/profile", (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect("/register");
+    }
+    res.render("profile", {
+        title: "Profile",
+    });
 });
 
 // /login route
@@ -206,6 +220,6 @@ app.get("/logout", (req, res) => {
     res.redirect("/register");
 });
 
-app.listen(8080, () => {
-    console.log("Server listening on port 8080.");
+app.listen(process.env.PORT || 8080, () => {
+    console.log("Server listening...");
 });

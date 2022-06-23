@@ -1,0 +1,23 @@
+<section>
+
+    <h2> Would you like to tell us more about yourself? </h2>
+
+    <div class="profile-failure">
+        {{#if error}}
+            <p>
+                Uh, oh. Something went wrong, please retry.</p>
+        {{/if}}
+
+    </div>
+
+    <form method="POST">
+
+        <input class="input-field" type="number" placeholder="Age" name="age" />
+        <input class="input-field" type="text" placeholder="City" name="city" />
+        <input class="input-field" type="text" placeholder="URL" name="url" />
+
+        <button class="submit-button">Continue</button>
+
+    </form>
+
+</section>

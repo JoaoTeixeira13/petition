@@ -84,6 +84,29 @@ app.get("/profile", (req, res) => {
     });
 });
 
+app.post("/profile", (req, res) => {
+    if (req.body.age === "" && req.body.city === "" && req.body.url === "") {
+        return res.redirect("/petition");
+    } else {
+        db.addProfile(
+            req.body.age,
+            req.body.city,
+            req.body.url,
+            req.session.userId
+        )
+            .then(() => {
+                res.redirect("/petition");
+            })
+            .catch((err) => {
+                console.log("error in db.add profile ", err);
+                res.render("profile", {
+                    title: "Profile",
+                    error: true,
+                });
+            });
+    }
+});
+
 // /login route
 
 app.get("/login", (req, res) => {
@@ -135,12 +158,7 @@ app.get("/petition", (req, res) => {
 });
 
 app.post("/petition", (req, res) => {
-    db.addSignature(
-        req.body.fName,
-        req.body.lName,
-        req.body.signature,
-        req.session.userId
-    )
+    db.addSignature(req.body.signature, req.session.userId)
         .then((result) => {
             db.getSignatures();
 

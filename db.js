@@ -17,13 +17,13 @@ const db = spicedPg(
 // signature queries
 
 module.exports.getSignatures = () => {
-    return db.query(`SELECT * FROM signers`);
+    return db.query(`SELECT * FROM users`);
 };
 
-module.exports.addSignature = (firstName, lastName, signature, userId) => {
-    const q = `INSERT INTO signers(first, last, signature, user_id) VALUES ($1, $2, $3, $4)
+module.exports.addSignature = (signature, userId) => {
+    const q = `INSERT INTO signers(signature, user_id) VALUES ($1, $2)
     RETURNING id`;
-    const param = [firstName, lastName, signature, userId];
+    const param = [signature, userId];
     return db.query(q, param);
 };
 
@@ -46,6 +46,15 @@ module.exports.addUser = (firstName, lastName, email, password) => {
 
 module.exports.matchEmail = (email) => {
     return db.query(`SELECT * FROM users WHERE email = $1`, [email]);
+};
+
+// profiles queries
+
+module.exports.addProfile = (age, city, url, userId) => {
+    const q = `INSERT INTO profiles(age, city, url, user_id) VALUES ($1, $2, $3, $4)
+    RETURNING id`;
+    const param = [age, city, url, userId];
+    return db.query(q, param);
 };
 
 //SELECT users.*, signatures.id AS "signatureID"

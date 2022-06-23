@@ -1,5 +1,7 @@
   DROP TABLE IF EXISTS signers;
   DROP TABLE IF EXISTS users;
+  DROP TABLE IF EXISTS profiles;
+
 
    CREATE TABLE users (
        id SERIAL PRIMARY KEY,
@@ -12,8 +14,15 @@
    CREATE TABLE signers (
        id SERIAL PRIMARY KEY,
        signature VARCHAR NOT NULL CHECK (signature != ''),
-       user_id INT NOT NULL REFERENCES users(id)   
+       user_id INT NOT NULL REFERENCES users(id) UNIQUE   
+   );
+
+   CREATE TABLE profiles (
+       id SERIAL PRIMARY KEY,
+       age INT,
+       city VARCHAR,
+       url VARCHAR,
+       user_id INT NOT NULL REFERENCES users(id) UNIQUE
    );
 
 
-   --INSERT INTO signers (first, last, signature) VALUES ('Miss A', 'Antonia', 'hahahahhha');

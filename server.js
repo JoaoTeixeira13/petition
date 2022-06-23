@@ -116,14 +116,23 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+    // console.log("requested password on post / login is ", req.body.password);
     db.matchEmail(req.body.email)
+
         .then((result) => {
             return bcrypt
                 .compare(req.body.password, result.rows[0].password)
                 .then(function (hashComparison) {
                     if (hashComparison) {
                         req.session.userId = result.rows[0].id;
-                        res.redirect("/petition");
+
+                        //is the user also signed?
+                        if (result.rows[0].signers_id) {
+                            req.session.signatureId = result.rows[0].signers_id;
+                            return res.redirect("/petition/thanks");
+                        } else {
+                            res.redirect("/petition");
+                        }
                     } else {
                         res.render("login", {
                             title: "Login",
@@ -148,7 +157,7 @@ app.get("/petition", (req, res) => {
         return res.redirect("/register");
     }
 
-    if (req.session.signedPetition) {
+    if (req.session.signatureId) {
         res.redirect("/petition/thanks");
     } else {
         res.render("petition", {
@@ -165,7 +174,6 @@ app.post("/petition", (req, res) => {
             //id key from object inside an array x[0].id
 
             req.session.signatureId = result.rows[0].id;
-            req.session.signedPetition = true;
             res.redirect("/petition/thanks");
         })
         .catch((err) => {
@@ -184,7 +192,7 @@ app.get("/petition/thanks", (req, res) => {
         return res.redirect("/register");
     }
 
-    if (req.session.signedPetition) {
+    if (req.session.signatureId) {
         //get signature, then amount of signers, then render
 
         db.displaySignature(req.session.signatureId).then((result) => {
@@ -213,7 +221,7 @@ app.get("/petition/signers", (req, res) => {
 
     // registerRedirection(req, res);
 
-    if (req.session.signedPetition) {
+    if (req.session.signatureId) {
         db.getSignatures()
             .then((result) => {
                 const sendResults = result.rows;

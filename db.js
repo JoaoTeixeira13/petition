@@ -45,7 +45,15 @@ module.exports.addUser = (firstName, lastName, email, password) => {
 };
 
 module.exports.matchEmail = (email) => {
-    return db.query(`SELECT * FROM users WHERE email = $1`, [email]);
+    // return db.query(`SELECT * FROM users WHERE email = $1`, [email]);
+    return db.query(
+        `SELECT users.*, signers.id AS signers_id 
+    FROM users
+    LEFT JOIN signers
+    ON users.id = signers.user_id
+    WHERE email = $1`,
+        [email]
+    );
 };
 
 // profiles queries

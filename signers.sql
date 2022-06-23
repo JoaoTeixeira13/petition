@@ -15,7 +15,7 @@
        id SERIAL PRIMARY KEY,
        signature VARCHAR NOT NULL CHECK (signature != ''),
        user_id INT NOT NULL REFERENCES users(id) UNIQUE   
-   );
+   ); 
 
    CREATE TABLE profiles (
        id SERIAL PRIMARY KEY,

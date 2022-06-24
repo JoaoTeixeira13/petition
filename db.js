@@ -14,7 +14,7 @@ const db = spicedPg(
         `postgres:${username}:${password}@localhost:5432/${database}`
 );
 
-// signature queries
+// signers queries
 
 module.exports.getSignatures = () => {
     //return db.query(`SELECT * FROM users`);
@@ -24,6 +24,19 @@ module.exports.getSignatures = () => {
         ON users.id = signers.user_id
         LEFT JOIN profiles
         ON users.id = profiles.user_id`);
+};
+
+module.exports.getSignersByCity = (city) => {
+    return db.query(
+        `SELECT users.*, signers.id AS signers_id, profiles.age AS age, profiles.city AS city, profiles.url AS url
+        FROM users
+        JOIN signers
+        ON users.id = signers.user_id
+        LEFT JOIN profiles
+        ON users.id = profiles.user_id
+        WHERE LOWER(city) = LOWER($1)`,
+        [city]
+    );
 };
 
 module.exports.addSignature = (signature, userId) => {
@@ -71,8 +84,3 @@ module.exports.addProfile = (age, city, url, userId) => {
     return db.query(q, param);
 };
 
-//SELECT users.*, signatures.id AS "signatureID"
-//FROM users
-// JOIN signatures
-//ON signatures.user_id = users.id
-// WHERE email = $1

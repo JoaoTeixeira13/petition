@@ -1,15 +1,27 @@
 <section>
 
+     {{#if city }} 
+    
+        <h2> Here are the signers from {{city}}. Reach out! </h2>
+
+     {{else}} 
     <h2> Here are your fellow signers. May your bounty be plentiful! </h2>
+
+
+     {{/if}} 
+
 
     <div class="signers-container">
 
         {{#sendResults}}
             {{#if url}}
-                <p><a href="{{url}}">{{first}} {{last}}</a> {{age}} {{city}}</p>
+                <p><a href="{{url}}">{{first}} {{last}}</a> {{age}} <a href="/petition/signers/{{city}}">{{city}}</a></p></p>
 
             {{else}}
-                <p>{{first}} {{last}} {{age}} {{city}}</p>
+                <p>{{first}}
+                    {{last}}
+                    {{age}}
+                    <a href="/petition/signers/{{city}}">{{city}}</a></p>
 
             {{/if}}
 

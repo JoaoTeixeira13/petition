@@ -4,6 +4,7 @@ const db = require("./db");
 const cookieSession = require("cookie-session");
 const bcrypt = require("./bcrypt");
 const { registerRedirection } = require("./registerRedirection");
+const { urlVerification } = require("./urlVerification");
 
 const { engine } = require("express-handlebars");
 
@@ -95,6 +96,11 @@ app.post("/profile", (req, res) => {
     if (req.body.age === "" && req.body.city === "" && req.body.url === "") {
         return res.redirect("/petition");
     } else {
+        console.log("url before verification, ", req.body.url);
+
+        req.body.url = urlVerification(req.body.url);
+        console.log("url after verification, ", req.body.url);
+
         db.addProfile(
             req.body.age,
             req.body.city,
@@ -244,6 +250,41 @@ app.get("/petition/signers", (req, res) => {
                 res.render("signers", {
                     title: "Signers",
                     sendResults,
+                });
+            })
+            .catch((err) => {
+                console.log("error is ", err);
+            });
+    } else {
+        res.redirect("/petition");
+    }
+});
+
+// /petition/signers/:city
+
+app.get("/petition/signers/:city", (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect("/register");
+    }
+
+    if (req.session.signatureId) {
+        console.log(
+            "requested parameters are: ",
+            req.params,
+            "requested city is : ",
+            req.params.city
+        );
+
+        db.getSignersByCity(req.params.city)
+            .then((result) => {
+                const sendResults = result.rows;
+                console.log("new query results are: ", sendResults);
+                console.log("sendResults.city is ,", sendResults[0].city);
+
+                res.render("signers", {
+                    title: "Signers",
+                    sendResults,
+                    city: req.params.city,
                 });
             })
             .catch((err) => {

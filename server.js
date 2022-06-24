@@ -239,6 +239,7 @@ app.get("/petition/signers", (req, res) => {
         db.getSignatures()
             .then((result) => {
                 const sendResults = result.rows;
+                console.log("new query results are: ", sendResults);
 
                 res.render("signers", {
                     title: "Signers",

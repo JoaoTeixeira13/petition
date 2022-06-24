@@ -17,7 +17,13 @@ const db = spicedPg(
 // signature queries
 
 module.exports.getSignatures = () => {
-    return db.query(`SELECT * FROM users`);
+    //return db.query(`SELECT * FROM users`);
+    return db.query(`SELECT users.*, signers.id AS signers_id, profiles.age AS age, profiles.city AS city, profiles.url AS url
+        FROM users
+        JOIN signers
+        ON users.id = signers.user_id
+        LEFT JOIN profiles
+        ON users.id = profiles.user_id`);
 };
 
 module.exports.addSignature = (signature, userId) => {

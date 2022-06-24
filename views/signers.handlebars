@@ -5,7 +5,14 @@
     <div class="signers-container">
 
         {{#sendResults}}
-            <p>{{first}} {{last}} {{age}} {{city}}</p>
+            {{#if url}}
+                <p><a href="{{url}}">{{first}} {{last}}</a> {{age}} {{city}}</p>
+
+            {{else}}
+                <p>{{first}} {{last}} {{age}} {{city}}</p>
+
+            {{/if}}
+
         {{/sendResults}}
 
     </div>

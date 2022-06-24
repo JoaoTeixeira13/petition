@@ -26,9 +26,9 @@ h2 {
     height: 100px;
 } */
 a {
-    text-decoration: none;
+    /* text-decoration: none;
     font-size: 1.5rem;
-    margin-top: 25px;
+    margin-top: 25px; */
     color: #204b42;
 }
 section {

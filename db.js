@@ -67,7 +67,7 @@ module.exports.matchEmail = (email) => {
 module.exports.addProfile = (age, city, url, userId) => {
     const q = `INSERT INTO profiles(age, city, url, user_id) VALUES ($1, $2, $3, $4)
     RETURNING id`;
-    const param = [age, city, url, userId];
+    const param = [age || null, city || null, url || null, userId];
     return db.query(q, param);
 };
 

@@ -38,6 +38,13 @@ app.use((req, res, next) => {
 // /register route
 
 app.get("/register", (req, res) => {
+    //handle an already signed / register user
+    if (req.session.signatureId) {
+        return res.redirect("/petition/thanks");
+    } else if (req.session.userId) {
+        return res.redirect("/petition");
+    }
+
     res.render("register", {
         title: "Register",
     });
@@ -110,6 +117,13 @@ app.post("/profile", (req, res) => {
 // /login route
 
 app.get("/login", (req, res) => {
+    //handle an already signed / register user
+
+    if (req.session.signatureId) {
+        return res.redirect("/petition/thanks");
+    } else if (req.session.userId) {
+        return res.redirect("/petition");
+    }
     res.render("login", {
         title: "Login",
     });
@@ -142,7 +156,7 @@ app.post("/login", (req, res) => {
                 });
         })
         .catch((err) => {
-            console.log("error in db.add actor ", err);
+            console.log("error in db. loging user in ", err);
             res.render("login", {
                 title: "Login",
                 error: true,

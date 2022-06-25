@@ -268,18 +268,11 @@ app.get("/petition/signers/:city", (req, res) => {
     }
 
     if (req.session.signatureId) {
-        console.log(
-            "requested parameters are: ",
-            req.params,
-            "requested city is : ",
-            req.params.city
-        );
-
+        
         db.getSignersByCity(req.params.city)
             .then((result) => {
                 const sendResults = result.rows;
                 console.log("new query results are: ", sendResults);
-                console.log("sendResults.city is ,", sendResults[0].city);
 
                 res.render("signers", {
                     title: "Signers",

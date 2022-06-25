@@ -28,7 +28,7 @@ module.exports.getSignatures = () => {
 
 module.exports.getSignersByCity = (city) => {
     return db.query(
-        `SELECT users.*, signers.id AS signers_id, profiles.age AS age, profiles.city AS city, profiles.url AS url
+        `SELECT users.first, users.last, signers.id, profiles.age, profiles.url AS url
         FROM users
         JOIN signers
         ON users.id = signers.user_id
@@ -83,4 +83,3 @@ module.exports.addProfile = (age, city, url, userId) => {
     const param = [age || null, city || null, url || null, userId];
     return db.query(q, param);
 };
-

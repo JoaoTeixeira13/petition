@@ -53,6 +53,10 @@ module.exports.countSigners = () => {
     return db.query(`SELECT COUNT (*) FROM signers`);
 };
 
+module.exports.deleteSignature = (id) => {
+    return db.query(`DELETE FROM signers WHERE id = $1`, [id]);
+};
+
 // user queries
 
 module.exports.addUser = (firstName, lastName, email, password) => {

@@ -31,6 +31,7 @@ a {
     font-size: 1.5rem;
     margin-top: 25px; */
     color: #204b42;
+    margin: 10px 0;
 }
 section {
     border: 15px solid #f1e4e4;
@@ -80,6 +81,27 @@ button {
 
 .profile-label {
     margin-bottom: 25px;
+}
+
+.inline {
+    display: inline;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #204b42;
+    text-decoration: underline;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    margin: 10px;
+}
+.link-button:focus {
+    outline: none;
+}
+.link-button:active {
+    color: #f1e4e4;
 }
 
 footer {

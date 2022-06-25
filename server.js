@@ -129,7 +129,6 @@ app.get("/profile/edit", (req, res) => {
     db.completeProfile(req.session.userId)
         .then((result) => {
             const profile = result.rows[0];
-            console.log("new query results are: ", profile);
 
             res.render("profileEdit", {
                 title: "Profile Edit",
@@ -163,12 +162,10 @@ app.post("/profile/edit", (req, res) => {
                 console.log("error in db. editing profile ", err);
             });
     } else {
-        console.log("evrything but with hashed password");
         bcrypt
             .hash(req.body.password)
             .then(function (hash) {
                 const hashedPassword = hash;
-                console.log("new hash is ", hash);
 
                 return db
                     .updateReqParams(
@@ -215,7 +212,6 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    // console.log("requested password on post / login is ", req.body.password);
     db.matchEmail(req.body.email)
 
         .then((result) => {
@@ -311,14 +307,24 @@ app.get("/petition/thanks", (req, res) => {
     }
 });
 
+app.post("/petition/thanks", (req, res) => {
+    db.deleteSignature(req.session.signatureId)
+        .then(() => {
+            req.session.signatureId = null;
+
+            res.redirect("/petition");
+        })
+        .catch((err) => {
+            console.log("error is ", err);
+        });
+});
+
 // /petition/signers route
 
 app.get("/petition/signers", (req, res) => {
     if (!req.session.userId) {
         return res.redirect("/register");
     }
-
-    // registerRedirection(req, res);
 
     if (req.session.signatureId) {
         db.getSignatures()
@@ -372,6 +378,8 @@ app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/register");
 });
+
+//Port listening
 
 app.listen(process.env.PORT || 8080, () => {
     console.log("Server listening...");

@@ -9,5 +9,16 @@
         Click here to see all other
         {{count}}
         people who signed so far.</a>
-
+    <a href="/profile/edit">Edit your profile</a>
+    <form method="post">
+        {{! <input type="hidden" name="extra_submit_param" value="extra_submit_value"> }}
+        <button
+            type="submit"
+            name="submit_param"
+            value="submit_value"
+            class="link-button"
+        >
+            You can delete your signature here.
+        </button>
+    </form>
 </section>

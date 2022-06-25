@@ -1,21 +1,21 @@
 <section>
 
-     {{#if city }} 
-    
+    {{#if city}}
+
         <h2> Here are the signers from {{city}}. Reach out! </h2>
 
-     {{else}} 
-    <h2> Here are your fellow signers. May your bounty be plentiful! </h2>
+    {{else}}
+        <h2> Here are your fellow signers. May your bounty be plentiful! </h2>
 
-
-     {{/if}} 
-
+    {{/if}}
 
     <div class="signers-container">
 
         {{#sendResults}}
             {{#if url}}
-                <p><a href="{{url}}" target="_blank">{{first}} {{last}}</a> {{age}} <a href="/petition/signers/{{city}}">{{city}}</a></p></p>
+                <p><a href="{{url}}" target="_blank">{{first}} {{last}}</a>
+                    {{age}}
+                    <a href="/petition/signers/{{city}}">{{city}}</a></p>
 
             {{else}}
                 <p>{{first}}

@@ -4,6 +4,8 @@
 
 // function sign to be called inside the events  (using canvas context)
 
+let signedCanvas = false;
+
 function sign(ctx, x1, y1, x2, y2) {
     ctx.beginPath();
     ctx.strokeStyle = "black";
@@ -47,8 +49,11 @@ window.addEventListener("mouseup", (event) => {
         x = 0;
         y = 0;
         mouseDown = false;
+        signedCanvas = true;
     }
     // inject the canvas toDataURL result into the input signature field
-    let dataURL = canvasElem.toDataURL();
-    document.querySelector('input[name="signature"]').value = dataURL;
+    if (signedCanvas) {
+        let dataURL = canvasElem.toDataURL();
+        document.querySelector('input[name="signature"]').value = dataURL;
+    }
 });

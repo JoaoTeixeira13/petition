@@ -330,7 +330,6 @@ app.get("/petition/signers", (req, res) => {
         db.getSignatures()
             .then((result) => {
                 const sendResults = result.rows;
-                console.log("new query results are: ", sendResults);
 
                 res.render("signers", {
                     title: "Signers",
@@ -356,7 +355,6 @@ app.get("/petition/signers/:city", (req, res) => {
         db.getSignersByCity(req.params.city)
             .then((result) => {
                 const sendResults = result.rows;
-                console.log("new query results are: ", sendResults);
 
                 res.render("signers", {
                     title: "Signers",
@@ -377,6 +375,36 @@ app.get("/petition/signers/:city", (req, res) => {
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/register");
+});
+
+// /profile/delete route
+
+app.get("/profile/delete", (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect("/register");
+    }
+    db.appeal(req.session.userId)
+        .then((result) => {
+            const userName = result.rows[0];
+            res.render("delete", {
+                title: "Delete",
+                userName,
+            });
+        })
+        .catch((err) => {
+            console.log("error is ", err);
+        });
+});
+
+app.post("/profile/delete", (req, res) => {
+    Promise.all([
+        db.deleteSigners(req.session.userId),
+        db.deleteProfiles(req.session.userId),
+    ]).then(() => {
+        db.deleteUsers(req.session.userId);
+        req.session = null;
+        res.redirect("/register");
+    });
 });
 
 //Port listening

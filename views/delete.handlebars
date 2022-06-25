@@ -1,0 +1,21 @@
+<section>
+
+    <h2>
+        {{userName.first}}, you are about to delete your account. Are you sure
+        about this?</h2>
+
+    <div class="login-failure">
+        {{#if error}}
+            <p> Something went wrong, please retry.</p>
+        {{/if}}
+
+    </div>
+
+    <form method="POST">
+
+        <button class="submit-button">DELETE ACCOUNT</button>
+
+    </form>
+    <a href="/petition"><button>Return</button></a>
+
+</section>

@@ -77,6 +77,29 @@ module.exports.matchEmail = (email) => {
     );
 };
 
+//get user's first name
+module.exports.appeal = (id) => {
+    return db.query(
+        `SELECT first 
+    FROM users 
+    WHERE id = $1`,
+        [id]
+    );
+};
+
+// deleting user account (dependent tables must be deleted first)
+
+module.exports.deleteSigners = (UserId) => {
+    return db.query(`DELETE FROM signers WHERE user_id = $1`, [UserId]);
+};
+module.exports.deleteProfiles = (UserId) => {
+    return db.query(`DELETE FROM profiles WHERE user_id = $1`, [UserId]);
+};
+
+module.exports.deleteUsers = (id) => {
+    return db.query(`DELETE FROM users WHERE id = $1`, [id]);
+};
+
 // profiles queries
 
 module.exports.addProfile = (age, city, url, userId) => {

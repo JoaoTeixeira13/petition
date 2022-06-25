@@ -1,0 +1,83 @@
+<section>
+
+    <h2> Edit your profile. </h2>
+
+    <div class="profileEdit-failure">
+        {{#if error}}
+            <p> Uh, oh. Something went wrong. please try again.</p>
+        {{/if}}
+
+    </div>
+
+    <form method="POST">
+
+        <label for="fName" class="profile-label">
+            <input
+                class="input-field"
+                type="text"
+                name="fName"
+                value={{profile.first}}
+            />
+            <p>First Name</p>
+        </label>
+
+        <label for="lName" class="profile-label">
+            <input
+                class="input-field"
+                type="text"
+                name="lName"
+                value={{profile.last}}
+            />
+            <p>Last Name</p>
+        </label>
+
+        <label for="email" class="profile-label">
+            <input
+                class="input-field"
+                type="email"
+                name="email"
+                value={{profile.email}}
+            />
+            <p>Email Address</p>
+        </label>
+
+        <label for="password" class="profile-label">
+            <input class="input-field" type="password" name="password" />
+            <p>Password</p>
+        </label>
+
+        <label for="age" class="profile-label">
+            <input
+                class="input-field"
+                type="number"
+                name="age"
+                value={{profile.age}}
+            />
+            <p>Age</p>
+        </label>
+
+        <label for="city" class="profile-label">
+            <input
+                class="input-field"
+                type="text"
+                name="city"
+                value={{profile.city}}
+            />
+            <p>City</p>
+        </label>
+
+        <label for="url" class="profile-label">
+            <input
+                class="input-field"
+                type="url"
+                name="url"
+                value={{profile.url}}
+            />
+            <p>Homepage</p>
+        </label>
+
+        <button class="submit-button">Update</button>
+
+    </form>
+
+</section>

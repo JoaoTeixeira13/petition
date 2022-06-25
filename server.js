@@ -120,6 +120,85 @@ app.post("/profile", (req, res) => {
     }
 });
 
+// /profile/edit route
+
+app.get("/profile/edit", (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect("/register");
+    }
+    db.completeProfile(req.session.userId)
+        .then((result) => {
+            const profile = result.rows[0];
+            console.log("new query results are: ", profile);
+
+            res.render("profileEdit", {
+                title: "Profile Edit",
+                profile,
+            });
+        })
+        .catch((err) => {
+            console.log("error is ", err);
+        });
+});
+
+app.post("/profile/edit", (req, res) => {
+    if (req.body.password === "") {
+        db.updateReqParamsNoPass(
+            req.body.fName,
+            req.body.lName,
+            req.body.email,
+            req.session.userId
+        )
+            .then(() => {
+                db.updateOptParams(
+                    req.session.userId,
+                    req.body.age,
+                    req.body.city,
+                    req.body.url
+                );
+
+                res.redirect("/petition");
+            })
+            .catch((err) => {
+                console.log("error in db. editing profile ", err);
+            });
+    } else {
+        console.log("evrything but with hashed password");
+        bcrypt
+            .hash(req.body.password)
+            .then(function (hash) {
+                const hashedPassword = hash;
+                console.log("new hash is ", hash);
+
+                return db
+                    .updateReqParams(
+                        req.body.fName,
+                        req.body.lName,
+                        req.body.email,
+                        hashedPassword,
+                        req.session.userId
+                    )
+                    .then(() => {
+                        db.updateOptParams(
+                            req.session.userId,
+                            req.body.age,
+                            req.body.city,
+                            req.body.url
+                        );
+
+                        res.redirect("/petition");
+                    });
+            })
+            .catch((err) => {
+                console.log("error in db.add actor ", err);
+                // res.render("register", {
+                //     title: "Register",
+                //     error: true,
+                // });
+            });
+    }
+});
+
 // /login route
 
 app.get("/login", (req, res) => {
@@ -268,7 +347,6 @@ app.get("/petition/signers/:city", (req, res) => {
     }
 
     if (req.session.signatureId) {
-        
         db.getSignersByCity(req.params.city)
             .then((result) => {
                 const sendResults = result.rows;

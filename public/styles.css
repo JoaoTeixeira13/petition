@@ -1,7 +1,8 @@
 body,
 section,
 form,
-.signers-container {
+.signers-container,
+.profile-label {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -75,6 +76,10 @@ button {
     /* height: 25%;
     overflow: scroll;
     overflow-x: hidden; */
+}
+
+.profile-label {
+    margin-bottom: 25px;
 }
 
 footer {

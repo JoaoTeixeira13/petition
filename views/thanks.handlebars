@@ -8,9 +8,8 @@
     <h2>{{sendResults.first}} {{sendResults.last}} </h2>
     <img src="{{sendResults.signature}}" alt="signature" />
 
-    <a href="/petition/signers">
-        Click here to see all other
-        {{count}}
+    <a href="/petition/signers" class="petition-signers">
+        Click here to see all <span class="count">{{count}}</span> 
         people who signed so far.</a>
     <form method="post">
         <button

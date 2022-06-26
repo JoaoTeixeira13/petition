@@ -24,9 +24,7 @@ h2 {
     font-size: 2rem;
     margin-bottom: 50px;
 }
-/* .petition-failure {
-    height: 100px;
-} */
+
 a {
     /* 
     font-size: 1.5rem;
@@ -43,12 +41,27 @@ section {
     margin: 5% 0;
 }
 
+footer {
+    margin-bottom: 3%;
+}
+
 /* navbar section */
+
+.hexagon {
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    background: url("/assets/bee.jpg") no-repeat;
+    background-size: cover;
+    margin: 20px auto;
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    left: 5%;
+}
 
 nav {
     display: flex;
     width: 100%;
-    height: 150px;
+    height: 160px;
     background-color: #204b42;
     margin: 0;
     justify-content: flex-end;
@@ -59,10 +72,22 @@ nav a {
     padding: 50px 30px;
     font-weight: lighter;
     font-size: 1.2rem;
+    margin-top: 35px;
 }
 
 nav a:last-child {
     margin-right: 15%;
+}
+
+/* stalker bee */
+
+#stalker {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    pointer-events: none;
+    background: url("/assets/transparent.png");
+    background-size: cover;
 }
 
 /* signature section */
@@ -102,9 +127,19 @@ button {
 
 .signers-container {
     margin-top: 80px;
-    /* height: 25%;
-    overflow: scroll;
-    overflow-x: hidden; */
+}
+.petition-signers:hover {
+    color: #f1e4e4;
+}
+
+a.petition-signers {
+    margin-top: 80px;
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+.count {
+    color: #f1e4e4;
+    padding: 0 3px;
 }
 
 .profile-label {
@@ -123,6 +158,7 @@ button {
     width: auto;
     height: auto;
     margin: 10px;
+    font-size: 1.2rem;
 }
 .link-button:focus {
     outline: none;
@@ -131,6 +167,9 @@ button {
     color: #f1e4e4;
 }
 
-footer {
-    margin-bottom: 3%;
+/* deleting commands */
+
+.link-button:hover,
+.delete {
+    background-color: #b20b0b;
 }

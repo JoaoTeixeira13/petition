@@ -57,3 +57,4 @@ window.addEventListener("mouseup", (event) => {
         document.querySelector('input[name="signature"]').value = dataURL;
     }
 });
+

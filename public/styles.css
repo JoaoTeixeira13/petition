@@ -169,6 +169,10 @@ button {
     color: #f1e4e4;
     background-color: #204b42;
 }
+button:active {
+    background-color: #fda500;
+    color: #0e2b25;
+}
 
 .signers-container {
     margin-top: 80px;
@@ -232,4 +236,8 @@ a.petition-signers {
 }
 .delete {
     color: #0e2b25;
+}
+.delete:active {
+    background-color: #600505;
+    color: #f1e4e4;
 }

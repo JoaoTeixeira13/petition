@@ -1,4 +1,5 @@
 // stalker bee
+let bee = true;
 
 let beeX = 0,
     beeY = 0,
@@ -7,7 +8,13 @@ let beeX = 0,
 const hive = document.querySelector(".hexagon");
 console.log("hive element is ", hive);
 hive.addEventListener("click", () => {
-    stalkerBee.style.visibility = "hidden";
+    if (bee) {
+        stalkerBee.style.visibility = "hidden";
+        bee = false;
+    } else {
+        stalkerBee.style.visibility = "visible";
+        bee = true;
+    }
 });
 
 document.onmousemove = (event) => {

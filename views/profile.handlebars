@@ -1,3 +1,5 @@
+{{>navbar loggedIn=true signedIn=false}}
+
 <section>
 
     <h2> Would you like to tell us more about yourself? </h2>
@@ -13,7 +15,14 @@
     <form method="POST">
 
         <input class="input-field" type="number" placeholder="Age" name="age" />
-        <input class="input-field" type="text" placeholder="City" name="city" />
+        <input
+            class="input-field"
+            type="text"
+            placeholder="City"
+            name="city"
+            pattern="[A-Za-z\s]+"
+            title="Provide only valid characters."
+        />
         <input class="input-field" type="url" placeholder="URL" name="url" />
 
         <button class="submit-button">Continue</button>

@@ -7,8 +7,17 @@
         <link rel="stylesheet" href="/styles.css" />
     </head>
     <body>
+        {{!-- <nav>
+            {{#if ../req.session.userId}}
+                <a href="/profile/edit">Profile</a>
+                <a href="/logout">Logout</a>
+            {{else}}
 
-        <h1>Main Layout</h1>
+                <a href="/login">Login</a>
+            {{/if}}
+        </nav> --}}
+
+        {{! <h1>Main Layout</h1> }}
 
         {{{body}}}
 

@@ -149,6 +149,8 @@ app.post("/profile/edit", (req, res) => {
             req.session.userId
         )
             .then(() => {
+                req.body.url = urlVerification(req.body.url);
+
                 db.updateOptParams(
                     req.session.userId,
                     req.body.age,
@@ -188,10 +190,6 @@ app.post("/profile/edit", (req, res) => {
             })
             .catch((err) => {
                 console.log("error in db.add actor ", err);
-                // res.render("register", {
-                //     title: "Register",
-                //     error: true,
-                // });
             });
     }
 });
@@ -295,10 +293,15 @@ app.get("/petition/thanks", (req, res) => {
             db.countSigners().then((result) => {
                 const count = result.rows[0].count;
 
-                res.render("thanks", {
-                    title: "Thanks",
-                    sendResults,
-                    count,
+                db.appeal(req.session.userId).then((result) => {
+                    const userName = result.rows[0];
+
+                    res.render("thanks", {
+                        title: "Thanks",
+                        sendResults,
+                        count,
+                        userName,
+                    });
                 });
             });
         });

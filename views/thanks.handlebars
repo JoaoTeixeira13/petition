@@ -1,6 +1,9 @@
+{{>navbar loggedIn=true signedIn=true}}
+
+
 <section>
 
-    <h2> 🐞 Thanks for signing, girl! 🐞</h2>
+    <h2> 🐞 Thanks for signing, {{userName.first}}! 🐞</h2>
 
     <h2>{{sendResults.first}} {{sendResults.last}} </h2>
     <img src="{{sendResults.signature}}" alt="signature" />
@@ -9,7 +12,6 @@
         Click here to see all other
         {{count}}
         people who signed so far.</a>
-    <a href="/profile/edit">Edit your profile</a>
     <form method="post">
         <button
             type="submit"
@@ -19,6 +21,6 @@
         >
             You can delete your signature here.
         </button>
-        <a href="/profile/delete"> Delete account </a>
+        
     </form>
 </section>

@@ -1,0 +1,14 @@
+<nav>
+
+    {{#if loggedIn}}
+        {{#if signedIn}}
+            <a href="/petition/thanks">Your Signature</a>
+            <a href="/petition/signers">Community</a>
+        {{/if}}
+        <a href="/profile/edit">Profile</a>
+        <a href="/logout">Logout</a>
+    {{else}}
+
+        <a href="/login">Login</a>
+    {{/if}}
+</nav>

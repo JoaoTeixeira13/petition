@@ -1,3 +1,5 @@
+{{>navbar loggedIn=true signedIn=true}}
+
 <section>
 
     <h2> Edit your profile. </h2>
@@ -16,7 +18,11 @@
                 class="input-field"
                 type="text"
                 name="fName"
-                value={{profile.first}}
+                pattern="[A-Za-z]+"
+                title="Provide only valid characters."
+                value="{{profile.first}}"
+                required
+                
             />
             <p>First Name</p>
         </label>
@@ -26,7 +32,10 @@
                 class="input-field"
                 type="text"
                 name="lName"
-                value={{profile.last}}
+                pattern="[A-Za-z]+"
+                title="Provide only valid characters."
+                value="{{profile.last}}"
+                required
             />
             <p>Last Name</p>
         </label>
@@ -36,7 +45,8 @@
                 class="input-field"
                 type="email"
                 name="email"
-                value={{profile.email}}
+                value="{{profile.email}}"
+                required
             />
             <p>Email Address</p>
         </label>
@@ -51,7 +61,7 @@
                 class="input-field"
                 type="number"
                 name="age"
-                value={{profile.age}}
+                value="{{profile.age}}"
             />
             <p>Age</p>
         </label>
@@ -61,17 +71,23 @@
                 class="input-field"
                 type="text"
                 name="city"
-                value={{profile.city}}
+                pattern="[A-Za-z\s]+"
+                title="Provide only valid characters."
+                {{#if profile.city}}
+                value="{{profile.city}}"
+                {{/if}}
             />
             <p>City</p>
         </label>
-
+        
         <label for="url" class="profile-label">
             <input
                 class="input-field"
                 type="url"
                 name="url"
-                value={{profile.url}}
+                {{#if profile.url}}
+                value="{{profile.url}}"
+                {{/if}}
             />
             <p>Homepage</p>
         </label>
@@ -79,5 +95,7 @@
         <button class="submit-button">Update</button>
 
     </form>
+
+    <a href="/profile/delete"> Delete account </a>
 
 </section>

@@ -9,7 +9,12 @@
         <a href="/profile/edit">Profile</a>
         <a href="/logout">Logout</a>
     {{else}}
+        {{#if reg}}
+            <a href="/login" class="singular-login">Login</a>
+        {{else}}
+            <a href="/register" class="singular-login">Register</a>
 
-        <a href="/login">Login</a>
+        {{/if}}
+
     {{/if}}
 </nav>

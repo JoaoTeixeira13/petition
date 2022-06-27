@@ -87,9 +87,19 @@ app.get("/profile", (req, res) => {
     if (!req.session.userId) {
         return res.redirect("/register");
     }
-    res.render("profile", {
-        title: "Profile",
-    });
+
+    db.appeal(req.session.userId)
+        .then((result) => {
+            const userName = result.rows[0];
+
+            res.render("profile", {
+                title: "Profile",
+                userName,
+            });
+        })
+        .catch((err) => {
+            console.log("error is ", err);
+        });
 });
 
 app.post("/profile", (req, res) => {
@@ -156,9 +166,13 @@ app.post("/profile/edit", (req, res) => {
                     req.body.age,
                     req.body.city,
                     req.body.url
-                );
-
-                res.redirect("/petition");
+                )
+                    .then(() => {
+                        res.redirect("/petition");
+                    })
+                    .catch((err) => {
+                        console.log("error is ", err);
+                    });
             })
             .catch((err) => {
                 console.log("error in db. editing profile ", err);
@@ -290,20 +304,28 @@ app.get("/petition/thanks", (req, res) => {
 
         db.displaySignature(req.session.signatureId).then((result) => {
             const sendResults = result.rows[0];
-            db.countSigners().then((result) => {
-                const count = result.rows[0].count;
+            db.countSigners()
+                .then((result) => {
+                    const count = result.rows[0].count;
 
-                db.appeal(req.session.userId).then((result) => {
-                    const userName = result.rows[0];
+                    db.appeal(req.session.userId)
+                        .then((result) => {
+                            const userName = result.rows[0];
 
-                    res.render("thanks", {
-                        title: "Thanks",
-                        sendResults,
-                        count,
-                        userName,
-                    });
+                            res.render("thanks", {
+                                title: "Thanks",
+                                sendResults,
+                                count,
+                                userName,
+                            });
+                        })
+                        .catch((err) => {
+                            console.log("error is ", err);
+                        });
+                })
+                .catch((err) => {
+                    console.log("error is ", err);
                 });
-            });
         });
     } else {
         res.redirect("/petition");
@@ -403,11 +425,15 @@ app.post("/profile/delete", (req, res) => {
     Promise.all([
         db.deleteSigners(req.session.userId),
         db.deleteProfiles(req.session.userId),
-    ]).then(() => {
-        db.deleteUsers(req.session.userId);
-        req.session = null;
-        res.redirect("/register");
-    });
+    ])
+        .then(() => {
+            db.deleteUsers(req.session.userId);
+            req.session = null;
+            res.redirect("/register");
+        })
+        .catch((err) => {
+            console.log("error is ", err);
+        });
 });
 
 //Port listening

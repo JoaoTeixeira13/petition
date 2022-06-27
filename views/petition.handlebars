@@ -1,8 +1,8 @@
 {{>navbar loggedIn=true signedIn=false}}
-    <img src="/assets/signature.png" alt="signature" class="form-img">
 <section class="sign-section">
 
     <h2> Use your mouse on the canvas below to sign our petition. </h2>
+    <img src="/assets/signature.png" alt="signature" class="form-img">
 
     <div class="petition-failure">
         {{#if error}}
@@ -20,7 +20,7 @@
             id="signature-input"
             required
         />
-        <canvas id="signCanvas" width="350" height="150"></canvas>
+        <canvas id="signCanvas" width="450" height="200"></canvas>
 
         <button class="submit-button">Submit</button>
 

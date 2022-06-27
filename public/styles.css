@@ -148,22 +148,34 @@ ul {
     padding-left: 10px;
 }
 
+/* login section */
+
+section.login {
+    padding: 40px 0;
+}
+section.login .form-img {
+    margin: 0 0 50px 0;
+}
+
 /* signature section */
 
 canvas,
 .input-field {
-    width: 350px;
+    width: 450px;
     border-radius: 10px;
     margin: 10px;
 }
 
 canvas {
-    height: 150px;
+    height: 200px;
     background-color: #ffffde;
 }
 
 .sign-section {
-    padding: 40px;
+    padding: 60px 40px;
+}
+.sign-section .form-img {
+    margin: 20 0 70px;
 }
 
 /* thanks section */

@@ -30,8 +30,11 @@ h2 {
 
 a {
     text-decoration: none;
-    color: #204b42;
+    color: #f1e4e4;
     margin: 10px 0;
+}
+a:hover {
+    color: #fda500;
 }
 section {
     border: 15px solid #f1e4e4;
@@ -43,6 +46,15 @@ section {
 
 footer {
     margin-bottom: 3%;
+}
+
+.form-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 10px solid #f1e4e4;
+    margin-top: 60px;
+    object-fit: cover;
 }
 
 /* navbar section */
@@ -149,6 +161,35 @@ canvas {
     background-color: #ffffde;
 }
 
+.sign-section {
+    padding: 40px;
+}
+
+/* thanks section */
+
+.thanks-form {
+    display: flex;
+    flex-direction: row;
+}
+.thanks-form .form-img {
+    margin: 20px;
+}
+.thanks-info {
+    display: flex;
+    flex-direction: column;
+    padding: 60px 40px 60px 60px;
+    align-content: flex-start;
+}
+.thanks-info form {
+    align-items: flex-start;
+}
+.thanks-info form button {
+    margin-left: 0;
+}
+section.thanks-form {
+    padding: 0 5%;
+}
+
 /* form inputs */
 .input-field {
     height: 50px;
@@ -187,7 +228,7 @@ a.petition-signers {
     font-size: 1.2rem;
 }
 .count {
-    color: #f1e4e4;
+    color: #fda500;
     padding: 0 3px;
 }
 
@@ -202,7 +243,7 @@ a.petition-signers {
 .link-button {
     background: none;
     border: none;
-    color: #204b42;
+    color: #f1e4e4;
     cursor: pointer;
     width: auto;
     height: auto;

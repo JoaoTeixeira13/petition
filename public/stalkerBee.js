@@ -36,3 +36,17 @@ function delayStalker() {
     stalker.style.left = revisedBeeX + "px";
 }
 delayStalker();
+
+//picture frames
+
+let frames = false;
+
+let pictureframes = document.querySelectorAll(".form-img");
+
+pictureframes[0].addEventListener("mouseover", () => {
+    pictureframes[0].style.border = "10px solid #fda500";
+});
+
+pictureframes[0].addEventListener("mouseout", () => {
+    pictureframes[0].style.border = "10px solid #f1e4e4";
+});

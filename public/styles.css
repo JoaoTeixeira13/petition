@@ -102,8 +102,8 @@ nav a:last-child {
 
 #stalker {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     pointer-events: none;
     background: url("/assets/transparent.png");
     background-size: cover;
@@ -190,6 +190,29 @@ section.thanks-form {
     padding: 0 5%;
 }
 
+/* profile edit section */
+.edit.form-img {
+    margin: 15px 0 60px 0;
+}
+
+.profile-label {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+.profile-form {
+    width: 500px;
+}
+.profile-label p {
+    font-size: 1.2rem;
+}
+
+/* delete account section */
+
+.form-img.delete-account {
+    margin-top: 20px;
+}
+
 /* form inputs */
 .input-field {
     height: 50px;
@@ -217,9 +240,6 @@ button:active {
 
 .signers-container {
     margin-top: 80px;
-}
-.petition-signers:hover {
-    color: #f1e4e4;
 }
 
 a.petition-signers {
@@ -263,7 +283,7 @@ a.petition-signers {
     color: #fda500;
     font-size: 1.6rem;
 }
-
+.link-button:hover,
 .warning:hover {
     color: #ff6601;
 }
@@ -271,7 +291,6 @@ a.petition-signers {
     background-color: #ff6601;
 }
 
-.link-button:hover,
 .delete {
     background-color: #fda500;
 }

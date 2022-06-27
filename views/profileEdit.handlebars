@@ -1,8 +1,11 @@
 {{>navbar loggedIn=true signedIn=true}}
 
-<section>
+<section class="profile-edit">
 
     <h2> Edit your profile </h2>
+
+        <img src="/assets/workerBee.jpg" alt="worker bee" class="form-img edit">
+
 
     <div class="profileEdit-failure">
         {{#if error}}
@@ -11,9 +14,11 @@
 
     </div>
 
-    <form method="POST">
+    <form method="POST" class="profile-form">
+        
 
         <label for="fName" class="profile-label">
+            <p>First Name</p>
             <input
                 class="input-field"
                 type="text"
@@ -24,10 +29,10 @@
                 required
                 
             />
-            <p>First Name</p>
         </label>
 
         <label for="lName" class="profile-label">
+            <p>Last Name</p>
             <input
                 class="input-field"
                 type="text"
@@ -37,10 +42,10 @@
                 value="{{profile.last}}"
                 required
             />
-            <p>Last Name</p>
         </label>
 
         <label for="email" class="profile-label">
+            <p>Email Address</p>
             <input
                 class="input-field"
                 type="email"
@@ -48,25 +53,25 @@
                 value="{{profile.email}}"
                 required
             />
-            <p>Email Address</p>
         </label>
 
         <label for="password" class="profile-label">
-            <input class="input-field" type="password" name="password" />
             <p>Password</p>
+            <input class="input-field" type="password" name="password" />
         </label>
 
         <label for="age" class="profile-label">
+            <p>Age</p>
             <input
                 class="input-field"
                 type="number"
                 name="age"
                 value="{{profile.age}}"
             />
-            <p>Age</p>
         </label>
 
         <label for="city" class="profile-label">
+            <p>City</p>
             <input
                 class="input-field"
                 type="text"
@@ -77,10 +82,10 @@
                 value="{{profile.city}}"
                 {{/if}}
             />
-            <p>City</p>
         </label>
         
         <label for="url" class="profile-label">
+            <p>Homepage</p>
             <input
                 class="input-field"
                 type="url"
@@ -89,7 +94,6 @@
                 value="{{profile.url}}"
                 {{/if}}
             />
-            <p>Homepage</p>
         </label>
 
         <button class="submit-button">Update</button>

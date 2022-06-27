@@ -36,6 +36,18 @@ app.use((req, res, next) => {
     next();
 });
 
+// unassigned / route
+
+app.get("/", (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect("/register");
+    } else if (req.session.signatureId) {
+        return res.redirect("/petition/thanks");
+    } else {
+        return res.redirect("/petition");
+    }
+});
+
 // /register route
 
 app.get("/register", (req, res) => {

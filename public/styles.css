@@ -29,7 +29,6 @@ h2 {
 }
 
 a {
-    text-decoration: none;
     color: #f1e4e4;
     margin: 10px 0;
 }
@@ -85,6 +84,7 @@ nav a {
     margin-top: 35px;
     font-size: 1.5rem;
     font-weight: normal;
+    text-decoration: none;
 }
 nav a:hover {
     color: #fda500;
@@ -96,6 +96,7 @@ nav a:last-child {
 
 .singular-login {
     font-weight: bolder;
+    align-self: center;
 }
 
 /* stalker bee */
@@ -177,7 +178,7 @@ canvas {
 .thanks-info {
     display: flex;
     flex-direction: column;
-    padding: 60px 40px 60px 60px;
+    padding: 60px 0px 60px 60px;
     align-content: flex-start;
 }
 .thanks-info form {
@@ -187,7 +188,9 @@ canvas {
     margin-left: 0;
 }
 section.thanks-form {
-    padding: 0 5%;
+    width: 70%;
+    padding: 40px;
+    margin-top: 130px;
 }
 
 /* profile edit section */
@@ -202,9 +205,37 @@ section.thanks-form {
 }
 .profile-form {
     width: 500px;
+    margin-top: 75px;
 }
+.profile-form .input-field {
+    width: 280px;
+}
+
 .profile-label p {
     font-size: 1.2rem;
+}
+
+section.profile-edit {
+    width: 75%;
+    flex-direction: row;
+    padding: 60px;
+    margin: 5% 0;
+    justify-content: space-evenly;
+}
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 80px 120px 80px 40px;
+}
+.edit-header {
+    align-self: center;
+    font-size: 2.6rem;
+    margin-bottom: 100px;
+}
+.profile-info .singular-login {
+    margin-top: auto;
+    margin-bottom: 45px;
 }
 
 /* delete account section */
@@ -269,6 +300,7 @@ a.petition-signers {
     height: auto;
     margin: 10px;
     font-size: 1.2rem;
+    text-decoration: underline;
 }
 .link-button:focus {
     outline: none;

@@ -41,12 +41,14 @@ delayStalker();
 
 let frames = false;
 
-let pictureframes = document.querySelectorAll(".form-img");
+let picFrames = document.querySelectorAll(".form-img");
 
-pictureframes[0].addEventListener("mouseover", () => {
-    pictureframes[0].style.border = "10px solid #fda500";
-});
+if (picFrames.length > 0) {
+    picFrames[0].addEventListener("mouseover", () => {
+        picFrames[0].style.border = "10px solid #fda500";
+    });
 
-pictureframes[0].addEventListener("mouseout", () => {
-    pictureframes[0].style.border = "10px solid #f1e4e4";
-});
+    picFrames[0].addEventListener("mouseout", () => {
+        picFrames[0].style.border = "10px solid #f1e4e4";
+    });
+}

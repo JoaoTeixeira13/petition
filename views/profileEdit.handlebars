@@ -2,17 +2,22 @@
 
 <section class="profile-edit">
 
-    <h2> Edit your profile </h2>
-
+    <div class="profile-info">
+        <h2 class="edit-header"> Edit your profile </h2>
+        
         <img src="/assets/workerBee.jpg" alt="worker bee" class="form-img edit">
 
-
-    <div class="profileEdit-failure">
         {{#if error}}
             <p> Uh, oh. Something went wrong. please try again.</p>
         {{/if}}
 
+        <a href="/profile/delete" class="singular-login warning"> Delete account </a>
+
     </div>
+
+
+
+
 
     <form method="POST" class="profile-form">
         
@@ -100,6 +105,5 @@
 
     </form>
 
-    <a href="/profile/delete" class="singular-login warning"> Delete account </a>
 
 </section>

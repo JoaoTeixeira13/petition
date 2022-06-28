@@ -1,19 +1,27 @@
 {{>navbar loggedIn=true signedIn=false}}
 
-<section>
+<section class="onboarding-form">
 
     <h2> Welcome, {{userName.first}}! Would you like to tell us more about yourself? </h2>
-    <h3>You can also continue and provide this information later if you wish to do so.</h3>
 
-    <div class="profile-failure">
+
         {{#if error}}
             <p>
                 Uh, oh. Something went wrong, please retry.</p>
         {{/if}}
 
-    </div>
+    <div class="onboarding-layout">
+
+       
+
+    <img src="/assets/butterfly.jpg" alt="butterfly" class="form-img onboarding">
+
+
+   
 
     <form method="POST">
+        <h3>You can also continue and provide this information later if you wish to do so.</h3>
+
 
         <input class="input-field" type="number" placeholder="Age" name="age" />
         <input
@@ -29,5 +37,7 @@
         <button class="submit-button">Continue</button>
 
     </form>
+
+     </div>
 
 </section>

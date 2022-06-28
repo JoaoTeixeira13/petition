@@ -9,20 +9,19 @@
 
     <h2>Thank you for signing, {{userName.first}}! </h2>
 
-    <h2>{{sendResults.first}} {{sendResults.last}} </h2>
     <img src="{{sendResults.signature}}" alt="signature" />
 
-    <a href="/petition/signers" class="petition-signers">
+    <a href="/petition/signers" class="petition-signers"><p>
         Click here to see all <span class="count">{{count}}</span> 
-        people who signed so far.</a>
+        people who signed so far.</p></a>
     <form method="post">
         <button
             type="submit"
             name="submit_param"
             value="submit_value"
             class="link-button"
-        >
-            You can delete your signature here.
+        ><p>            You can delete your signature here.
+</p>
         </button>
         
     </form>

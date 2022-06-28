@@ -2,14 +2,15 @@
 <section class="sign-section">
 
     <h2> Use your mouse on the canvas below to sign our petition. </h2>
-    <img src="/assets/signature.png" alt="signature" class="form-img">
-
-    <div class="petition-failure">
         {{#if error}}
             <p> Please sign the canvas before submitting.</p>
         {{/if}}
+    <div class="petition-layout">
 
-    </div>
+    
+    <img src="/assets/signature.png" alt="signature" class="form-img">
+
+
 
     <form method="POST">
 
@@ -25,6 +26,7 @@
         <button class="submit-button">Submit</button>
 
     </form>
+    </div>
 </section>
 
 <script src="/script.js" type="module"></script>

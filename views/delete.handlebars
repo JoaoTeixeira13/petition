@@ -5,21 +5,20 @@
 
     <h2>
         {{userName.first}}, you are about to delete your account. Are you sure
-        about this?</h2>
-    <img src="/assets/DeadBee.png" alt="dead bumblebee" class="form-img delete-account">
+        you want to proceed?</h2>
+        <img src="/assets/DeadBee.png" alt="dead bumblebee" class="form-img delete-account">
 
-    <div class="login-failure">
         {{#if error}}
             <p> Something went wrong, please retry.</p>
         {{/if}}
 
-    </div>
+    
 
-    <form method="POST">
+    <form method="POST" class="delete-post">
 
         <button class="submit-button delete">DELETE ACCOUNT</button>
 
     </form>
-    <a href="/profile/edit"><button>Return</button></a>
+    <a href="/profile/edit"><button class="return">Return</button></a>
 
 </section>

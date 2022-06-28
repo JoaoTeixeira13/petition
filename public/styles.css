@@ -11,6 +11,10 @@ form,
     align-items: center;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #099a97;
     color: #f1e4e4;
@@ -26,6 +30,9 @@ h2 {
     font-size: 2rem;
     margin-bottom: 50px;
     line-height: 1.5;
+}
+p {
+    font-size: 1.4rem;
 }
 
 a {
@@ -48,13 +55,28 @@ footer {
     margin-bottom: 3%;
 }
 
+.icon,
+.form-img {
+    border-radius: 50%;
+    object-fit: cover;
+}
 .form-img {
     width: 300px;
     height: 300px;
-    border-radius: 50%;
-    border: 10px solid #f1e4e4;
     margin-top: 60px;
-    object-fit: cover;
+    border: 10px solid #f1e4e4;
+}
+.form-img:hover {
+    border: 10px solid #fda500;
+}
+.icon {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border: 4px solid #f1e4e4;
+}
+.icon:hover {
+    border: 4px solid #fda500;
 }
 
 /* navbar section */
@@ -136,12 +158,23 @@ section.register {
 
 .register-appeal {
     margin: 100px 0 10% 150px;
-    width: 35%;
+    width: 30%;
     justify-content: space-between;
     align-items: flex-start;
 }
-p {
-    font-size: 1.4rem;
+.register-appeal h2 {
+    margin-bottom: 120px;
+}
+.icon-container p {
+    margin-top: 0;
+    padding-left: 20px;
+}
+.icon-container {
+    display: flex;
+    margin-bottom: 25px;
+}
+.register .input-field {
+    width: 320px;
 }
 
 /* onboarding section */
@@ -230,6 +263,14 @@ section.thanks-form {
     margin-top: 130px;
 }
 
+/* signers section */
+.city-link {
+    color: #600505;
+}
+.signers-display .form-img {
+    margin-top: 30px;
+}
+
 /* profile edit section */
 .edit.form-img {
     margin: 15px 0 60px 0;
@@ -282,6 +323,13 @@ section.profile-edit {
     margin-top: 20px;
 }
 
+.delete-post .submit-button.delete {
+    margin-bottom: 0;
+}
+.return {
+    margin-top: 0;
+}
+
 /* form inputs */
 .input-field {
     height: 50px;
@@ -301,6 +349,7 @@ button {
     font-family: Helvetica, Arial, sans-serif;
     color: #0e2b25;
     background-color: #fda500;
+    cursor: pointer;
 }
 button:active {
     background-color: #0e2b25;

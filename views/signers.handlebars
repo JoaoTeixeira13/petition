@@ -1,6 +1,6 @@
 {{>navbar loggedIn=true signedIn=true}}
 
-<section>
+<section class="signers-display">
 
     {{#if city}}
 
@@ -21,14 +21,20 @@
         {{#sendResults}}
             {{#if url}}
                 <p><a href="{{url}}" target="_blank">{{first}} {{last}}</a>
-                    {{age}}
-                    <a href="/petition/signers/{{city}}">{{city}}</a></p>
+                    {{#if age}}
+                    ({{age}})
+                    {{/if}}
+                    <a href="/petition/signers/{{city}}" class="city-link"><em>&nbsp;&nbsp;&nbsp;&nbsp;{{city}}</em></a></p>
 
             {{else}}
                 <p>{{first}}
                     {{last}}
-                    {{age}}
-                    <a href="/petition/signers/{{city}}">{{city}}</a></p>
+                    {{#if age}}
+                    ({{age}})
+                    {{/if}}
+                    
+                    <a href="/petition/signers/{{city}}" class="city-link"><em>&nbsp;&nbsp;&nbsp;&nbsp;{{city}}</em></a></p>
+                    
 
             {{/if}}
 

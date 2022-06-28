@@ -14,6 +14,17 @@ const COOKIE_SECRET =
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 
+//heroku https
+
+if (process.env.NODE_ENV == "production") {
+    app.use((req, res, next) => {
+        if (req.headers["x-forwarded-proto"].startsWith("https")) {
+            return next();
+        }
+        res.redirect(`https://${req.hostname}${req.url}`);
+    });
+}
+
 app.use(
     cookieSession({
         secret: COOKIE_SECRET,
@@ -73,9 +84,9 @@ app.post("/register", (req, res) => {
 
             return db
                 .addUser(
-                    req.body.fName,
-                    req.body.lName,
-                    req.body.email,
+                    req.body.fName.replace(/\s\s+/g, " ").trim(),
+                    req.body.lName.replace(/\s\s+/g, " ").trim(),
+                    req.body.email.trim(),
                     hashedPassword
                 )
                 .then((result) => {
@@ -125,7 +136,7 @@ app.post("/profile", (req, res) => {
 
         db.addProfile(
             req.body.age,
-            req.body.city,
+            req.body.city.replace(/\s\s+/g, " ").trim(),
             req.body.url,
             req.session.userId
         )
@@ -165,9 +176,9 @@ app.get("/profile/edit", (req, res) => {
 app.post("/profile/edit", (req, res) => {
     if (req.body.password === "") {
         db.updateReqParamsNoPass(
-            req.body.fName,
-            req.body.lName,
-            req.body.email,
+            req.body.fName.replace(/\s\s+/g, " ").trim(),
+            req.body.lName.replace(/\s\s+/g, " ").trim(),
+            req.body.email.trim(),
             req.session.userId
         )
             .then(() => {
@@ -176,7 +187,7 @@ app.post("/profile/edit", (req, res) => {
                 db.updateOptParams(
                     req.session.userId,
                     req.body.age,
-                    req.body.city,
+                    req.body.city.replace(/\s\s+/g, " ").trim(),
                     req.body.url
                 )
                     .then(() => {
@@ -197,17 +208,19 @@ app.post("/profile/edit", (req, res) => {
 
                 return db
                     .updateReqParams(
-                        req.body.fName,
-                        req.body.lName,
-                        req.body.email,
+                        req.body.fName.replace(/\s\s+/g, " ").trim(),
+                        req.body.lName.replace(/\s\s+/g, " ").trim(),
+                        req.body.email.trim(),
                         hashedPassword,
                         req.session.userId
                     )
                     .then(() => {
+                        req.body.url = urlVerification(req.body.url);
+
                         db.updateOptParams(
                             req.session.userId,
                             req.body.age,
-                            req.body.city,
+                            req.body.city.replace(/\s\s+/g, " ").trim(),
                             req.body.url
                         );
 

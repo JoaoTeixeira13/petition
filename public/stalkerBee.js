@@ -6,7 +6,6 @@ let beeX = 0,
     stalkerBee = document.getElementById("stalker");
 
 const hive = document.querySelector(".hexagon");
-console.log("hive element is ", hive);
 hive.addEventListener("click", () => {
     if (bee) {
         stalkerBee.style.visibility = "hidden";

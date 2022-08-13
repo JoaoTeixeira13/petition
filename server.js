@@ -90,7 +90,6 @@ app.post("/register", (req, res) => {
                     hashedPassword
                 )
                 .then((result) => {
-                    console.log("Inside addUser");
                     req.session.userId = result.rows[0].id;
                     res.redirect("/profile");
                 });
@@ -129,10 +128,8 @@ app.post("/profile", (req, res) => {
     if (req.body.age === "" && req.body.city === "" && req.body.url === "") {
         return res.redirect("/petition");
     } else {
-        console.log("url before verification, ", req.body.url);
 
         req.body.url = urlVerification(req.body.url);
-        console.log("url after verification, ", req.body.url);
 
         db.addProfile(
             req.body.age,
